@@ -29,8 +29,8 @@ jobs:
             apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends
             rm -rf /var/lib/apt/lists/*
       - run:
-          name: Install NPM Dependencies
-          command: npm install
+          name: Install NPM and app dependencies
+          command: nvm install-latest-npm && npm install
       - run:
           name: Run tests
           command: npm run test
