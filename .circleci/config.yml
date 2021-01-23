@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: ubuntu:latest
+      - image: node:latest
     steps:
       - checkout
       - run:
@@ -16,7 +16,7 @@ jobs:
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install node && nvm install-latest-npm
+            nvm install node
       - run:
           name: Download Puppeteer Dependecies
           command: |
@@ -28,9 +28,3 @@ jobs:
             apt-get update
             apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends
             rm -rf /var/lib/apt/lists/*
-      - run:
-          name: Install NPM dependencies
-          command:  npm install
-      - run:
-          name: Run tests
-          command: npm run test
