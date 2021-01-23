@@ -6,6 +6,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Update packages and install curl
+          command: |
+            apt-get update
+            apt-get install curl -y
+      - run:
           name: Install the Node Version Manager and Node.js
           command: |
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
