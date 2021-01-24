@@ -1,4 +1,15 @@
 version: 2.1
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 jobs:
   build:
     docker:
@@ -20,3 +31,14 @@ jobs:
           name: Run tests
           command: |
             npm install && npm run test
+  deploy:
+    docker:
+      - image: node:latest
+    steps:
+      - run:
+          name: Install AWS Cli
+          command: apt-get update && apt-get install awscli
+      - run:
+          name: Copy to S3
+          command: aws s3 sync index.html s3://simple-button
+
