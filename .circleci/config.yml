@@ -32,7 +32,7 @@ jobs:
           command: |
             npm install && npm run test
       - save_cache:
-          key: npm-cache-{{ .Branch }}-{{ checksum package.json }}
+          key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
           - node_modules
   deploy:
