@@ -44,6 +44,6 @@ jobs:
       - run:
           name: Copy to S3
           command: |
-            aws s3 sync circleci.html s3://simple-button
-            aws s3 sync circleci.js s3://simple-button
+            aws s3 sync ./circleci.html s3://simple-button
+            aws s3 sync ./circleci.js s3://simple-button
 
