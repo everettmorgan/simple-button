@@ -38,6 +38,7 @@ jobs:
       - run:
           name: Install AWS Cli
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             apt-get update && apt-get install awscli -y
       - run:
           name: Copy to S3
