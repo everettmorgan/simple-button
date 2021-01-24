@@ -37,10 +37,10 @@ jobs:
     steps:
       - run:
           name: Install AWS Cli
-          command: apt-get update && apt-get install awscli -y
+          command: |
+            apt-get update && apt-get install awscli -y
       - run:
           name: Copy to S3
           command: |
-            export DEBIAN_FRONTEND=noninteractive
             aws s3 sync index.html s3://simple-button
 
