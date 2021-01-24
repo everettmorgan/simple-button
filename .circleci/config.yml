@@ -35,6 +35,7 @@ jobs:
     docker:
       - image: ubuntu:latest
     steps:
+      - checkout
       - run:
           name: Install AWS Cli
           command: |
