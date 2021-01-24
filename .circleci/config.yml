@@ -31,6 +31,10 @@ jobs:
           name: Run tests
           command: |
             npm install && npm run test
+      - save-cache:
+          key: npm-cache-{{ .Branch }}-{{ checksum package.json }}
+          paths:
+          - node_modules
   deploy:
     docker:
       - image: ubuntu:latest
