@@ -40,5 +40,7 @@ jobs:
           command: apt-get update && apt-get install awscli -y
       - run:
           name: Copy to S3
-          command: aws s3 sync index.html s3://simple-button
+          command: |
+            export DEBIAN_FRONTEND=noninteractive
+            aws s3 sync index.html s3://simple-button
 
