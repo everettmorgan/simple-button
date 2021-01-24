@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
 # Update package repositories
 RUN apt-get update && apt-get install -y -q --no-install-recommends \
 apt-transport-https \
@@ -11,11 +13,14 @@ libssl-dev \
 gnupg \
 wget
 
-# Install nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash && \
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && \
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
-nvm install node
+# Install node
+SHELL ["/bin/bash", "--login", "-i", "-c"]
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+RUN source /root/.bashrc && nvm install 12.14.1
+SHELL ["/bin/bash", "--login", "-c"]
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 
 # Install Puppeteer dependencies
 RUN export DEBIAN_FRONTEND=noninteractive && \
