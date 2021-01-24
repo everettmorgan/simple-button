@@ -16,6 +16,8 @@ jobs:
       - image: everettmorgan/circleci-simple-button:latest
     steps:
       - checkout
+      - restore_cache:
+          key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Run tests
           command: npm install && npm run test
