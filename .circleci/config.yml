@@ -33,7 +33,7 @@ jobs:
             npm install && npm run test
   deploy:
     docker:
-      - image: node:latest
+      - image: ubuntu:latest
     steps:
       - run:
           name: Install AWS Cli
